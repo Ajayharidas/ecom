@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for message in messages %}
+<div class="alert alert-muted text-muted">{{ message }}</div>
+{% endfor %}
+
+<div class="row">
+    <div class="col-md-2">
+        <div class="row" id="v-nav">
+            <div class="card">
+                <div class="card-body">
+                    <a href="{% url 'show_all' %}">All</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text">brands</p>
+                    <form action="{% url 'brand_product' %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            {% for brand in brands %}
+                            <div class="form-check">
+                                <input type="checkbox" value="{{ brand.id }}" class="form-check-input" id="brand"
+                                    name="brand">
+                                <label for="brand" class="form-check-label">{{ brand.brand_name }}</label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="form-control" value="Go">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text">categories</p>
+                    <form action="{% url 'category_product' %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            {% for cat in category %}
+                            <div class="form-check">
+                                <input type="checkbox" value="{{ cat.id }}" class="form-check-input" id="category"
+                                    name="category">
+                                <label for="category" class="form-check-label">{{ cat.category_name }}</label><br>
+
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="form-control" value="Go">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="row w-100">
+            <!-- <h3>{{ b_name.brand_name }}</h3> -->
+        </div>
+
+        <div class="row" id="all">
+            {% for b_product in b_products %}
+            <div class="card" id="product">
+                <img src="{{ b_product.product_image.url }}" alt="{{ b_product.product_name }}" class="card-img-top">
+                <div class="card-body text-center">
+                    <a href="" class="stretched-link">{{ b_product.brand.brand_name }}</a>
+                    <p class="card-text">{{ b_product.product_name }}<br>Rs.{{ b_product.product_price }}</p>
+                </div>
+            </div>
+            {% empty %}
+
+            <h4>Currently no products available...</h4>
+
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

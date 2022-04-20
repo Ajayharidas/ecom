@@ -1,0 +1,205 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css/ecom.css' %}">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            {% if user.is_authenticated %}
+
+                {% if user.is_superuser %} 
+
+                    <nav class="navbar navbar-expand-md navbar-light w-100">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav">
+                            <span class="material-icons-outlined">
+                                expand_more
+                            </span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="nav">
+                            <ul class="navbar-nav">
+                                <li class="nav-item"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
+                                <li class="nav-item"><a href="" class="nav-link">Men</a></li>
+                                <li class="nav-item"><a href="" class="nav-link">Women</a></li>
+                                <li class="nav-item"><a href="" class="nav-link">Kid</a></li>
+                                <li class="nav-item">
+                                    <div class="btn-group">
+                                        <a type="button" class="btn btn-muted  dropdown-toggle" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">
+                                            Add
+                                    </a>
+                                        <div class="dropdown-menu" id="ad-drop">
+                                            <a href="{% url 'add_category' %}" class="dropdown-item">Add Category</a>
+                                            <a href="{% url 'add_brand' %}" class="dropdown-item">Add Brand</a>
+                                            <a href="{% url 'add_product' %}" class="dropdown-item">Add Proudct</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <div class="btn-group">
+                                        <a type="button" class="btn btn-muted  dropdown-toggle" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">
+                                            Details
+                                    </a>
+                                        <div class="dropdown-menu">
+                                            <a href="{% url 'show_category' %}" class="dropdown-item">Category</a>
+                                            <a href="{% url 'show_brand' %}" class="dropdown-item">Brand</a>
+                                            <a href="{% url 'product_table' %}" class="dropdown-item">Proudct</a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item"><a href="{% url 'log_out' %}" class="nav-link">Log Out</a></li>
+                            </ul>
+                        </div>
+                {% else %}
+
+                    <nav class="navbar navbar-expand-md navbar-light w-100">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav">
+                            <span class="material-icons-outlined">
+                                expand_more
+                            </span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="nav">
+                            <ul class="navbar-nav">
+                                <li class="nav-item"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
+                                <li class="nav-item"><a href="" class="nav-link">Men</a></li>
+                                <li class="nav-item"><a href="" class="nav-link">Women</a></li>
+                                <li class="nav-item"><a href="" class="nav-link">Kid</a></li>
+                            </ul>
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item"><a href="{% url 'show_cart' %}" class="nav-link">Cart</a></li>
+                                <li class="nav-item"><a href="{% url 'log_out' %}" class="nav-link">Log Out</a></li>
+                            </ul>
+                        </div>
+
+                {% endif %}
+
+            {% else %}
+
+                <nav class="navbar navbar-expand-md navbar-light w-100">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav">
+                        <span class="material-icons-outlined">
+                            expand_more
+                        </span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="nav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item"><a href="{% url 'log_in' %}" class="nav-link">Home</a></li>
+                            <li class="nav-item"><a href="" class="nav-link">Men</a></li>
+                            <li class="nav-item"><a href="" class="nav-link">Women</a></li>
+                            <li class="nav-item"><a href="" class="nav-link">Kid</a></li>
+                        </ul>
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <div class="btn-group"><a href="" type="button" class="btn btn-muted dropdown-toggle"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Login</a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <h6 class="dropdown-header">Login</h6>
+                                        <form action="{% url 'log_in' %}" method="post" id="login">
+                                            {% csrf_token %}
+                                            <div class="form-group"><input type="text" class="form-control"
+                                                    placeholder="Username" name="uname">
+                                            </div>
+                                            <div class="form-group"><input type="password" class="form-control"
+                                                    placeholder="Password" name="passw">
+                                            </div>
+                                            <div class="form-group"><input type="submit" class="btn btn-dark text-white"
+                                                    value="Login">
+                                            </div>
+                                        </form>
+                                        <div class="dropdown-divider"></div>
+                                        <a href="" type="button" class="dropdown-item" data-toggle="modal"
+                                            data-target="#myModal">New around here? Sign Up</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                </nav>
+                <div class="modal fade" id="myModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h6 class="modal-title">Sign Up</h6>
+                                <button type="button" data-dismiss="modal" class="close"><span class="material-icons-outlined">
+                                    close
+                                    </span></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{% url 'sign_up' %}" method="post" id="signup"
+                                    enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="form-group mt-2"><input type="text" class="form-control"
+                                            placeholder="First name" name="fname">
+                                    </div>
+                                    <div class="form-group"><input type="text" class="form-control"
+                                            placeholder="Last name" name="lname">
+                                    </div>
+                                    <div class="form-check form-check-inline"><input type="radio"
+                                            class="form-check-input" value="male" id="male" name="gender">
+                                        <label for="male" class="form-check-label">Male</label>
+                                    </div>
+                                    <div class="form-check form-check-inline"><input type="radio"
+                                            class="form-check-input" value="female" id="female" name="gender">
+                                        <label for="female" class="form-check-label">Female</label>
+                                    </div>
+                                    <div class="form-group"><textarea type="text" class="form-control"
+                                            placeholder="Address" rows="2" name="address"></textarea></div>
+                                    <div class="form-group"><input type="email" class="form-control" placeholder="Email"
+                                            name="email">
+                                    </div>
+                                    <div class="form-group"><input type="number" class="form-control"
+                                            placeholder="Contact" name="contact">
+                                    </div>
+                                    <div class="form-group"><input type="text" class="form-control"
+                                            placeholder="Username" name="uname">
+                                    </div>
+                                    <div class="form-group"><input type="password" class="form-control"
+                                            placeholder="Password" name="passw">
+                                    </div>
+                                    <div class="form-group"><input type="password" class="form-control"
+                                            placeholder="Confirm password" name="cpassw">
+                                    </div>
+                                    <div class="form-group"><input type="file" accept="image/*"
+                                            class="form-control-file" name="image">
+                                    </div>
+                                    <div class="form-group"><input type="submit" class="btn btn-dark text-white"
+                                            value="Register">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+        </div>
+    </div>
+
+
+    <div class="container-fluid" id="extend">
+        {% block content %}
+
+        {% endblock %}
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <h2 class="mb-4">Cart</h2>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-7">
+        {% for i in item %}
+        <div class="card cart-item">
+            <div class="card-body bg-transparent">
+                <div class="row" style="padding: 0%;margin: 0%;">
+                    <div class="col-sm-3">
+                        <!-- <img src="{{image.product_image.url}}" class="w-75" alt=""> -->
+                    </div>
+                    <div class="col-sm-3 border-left " >
+                        <h4 class="brand">{{i.brand_name}}</h4>
+                        <p class="details">{{i.category_name}}</p>
+                        <p class="details">{{i.product_name}}</p>
+                        <p class="details">{{i.product_price}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <h5>Empty cart...</h5>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

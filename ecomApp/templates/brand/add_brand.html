@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <h2 class="mb-4">Add Brands</h2>
+</div>
+
+<div class="row justify-content-center">
+    <form action="{% url 'add_brand' %}" method="post" enctype="multipart/form-data" class="add">
+        {% csrf_token %}
+        <div class="form-group">
+            <input type="text" class="form-control" name="brand_name" placeholder="Brand name">
+        </div>
+        <div class="form-group">
+            <input type="file" class="form-control-file" name="brand_image">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-danger">Save</button>
+        </div>
+    </form>
+</div>
+{% for message in messages %}
+<div class="alert alert-muted text-danger">{{ message }}</div>
+{% endfor %}
+
+{% endblock %}

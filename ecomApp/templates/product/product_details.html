@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+
+    <div class="col-md-5">
+        <!-- <div class="row w-100"> -->
+        <!-- <h3>{{ b_name.brand_name }}</h3> -->
+        <!-- </div> -->
+        <div class="card rounded-0">
+            <img src="{{ details.product_image.url }}" alt="{{ details.product_name }}" class="card-img-top">
+        </div>
+    </div>
+    <div class="col-md-1">
+        <div class="row" id="p-imgs">
+            {% for image in images %}
+            <div class="card" id="multi">
+                <img src="{{ image.images.url }}" alt="{{ image.product.product_name }}" class="card-img-top">
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-md-6 border-left">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-text brand">{{ details.brand.brand_name }}</h4>
+                <p class="card-text details">{{ details.product_name }}</p>
+                <p class="card-text details">Rs.{{ details.product_price }}</p>
+            </div>
+            <div class="card-footer">
+                <form action="{% url 'cart' details.id %}" method="post">
+                    {% csrf_token %}
+                    <input type="text" value="{{ details.product_name }}" name="pname" hidden>
+                    <input type="text" value="{{ details.brand.brand_name }}" name="brand" hidden>
+                    <input type="text" value="{{ details.category.category_name }}" name="category" hidden>
+                    <input type="text" value="{{ details.product_price }}" name="price" hidden>
+                    <button class="btn btn-muted btn-cart" data-toggle="tooltip" title="Add to cart" type="submit"><i class="fa fa-shopping-cart"></i></button>
+                    <button type="" class="btn btn-like btn-sm" data-toggle="tooltip" title="Add to wishlist"><i class="fa fa-heart-o"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+$(".btn-like").click(function () {
+        $(this).find("i").toggleClass("fa-heart-o fa-heart");
+    });
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <h2 class="mb-4">Products</h2>
+</div>
+
+<div class="row justify-content-center">
+    <table class="table table-hover  table-bordered w-75">
+        <thead class="thead-light">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Image</th>
+                <th>Brand</th>
+                <th>Category</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in products %}
+            <tr>
+                <td>{{p.id}}</td>
+                <td>{{p.product_name}}</td>
+                <td>{{p.product_price}}</td>
+                <td><img src="{{p.product_image.url}}" alt="{{p.product_name}}" class="w-25"></td>
+                <td>{{p.brand.brand_name}}</td>
+                <td>{{p.category.category_name}}</td>
+                <td><a href="">Edit</a>&nbsp;<a href="">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

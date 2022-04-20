@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="row justify-content-center">
+    <div class="card-group" id="category">
+        {% for c in category %}
+        <div class="card col-sm-3">
+            <div class="row justify-content-center">
+            <img src="{{ c.category_image.url }}" alt="{{ i.category_name }}" class="card-img-top">
+        </div>
+            <div class="card-body text-center">
+                <a href="{% url 'show_product' c.id %}" class="stretched-link">{{ c.category_name }}</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

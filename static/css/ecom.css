@@ -1,0 +1,361 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+    background-color: #efebe940;
+}
+
+.navbar {
+    background-color: #eceff1;
+}
+
+.form-inline {
+    margin-right: 10%;
+}
+
+.navbar .form-inline .form-control {
+    border: none;
+    border-bottom: .5px solid white;
+    border-radius: 0%;
+}
+
+.navbar .form-inline .form-control:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+.navbar .form-inline .input-group-append .btn {
+    border-radius: 0%;
+}
+
+.navbar .form-inline .input-group-append .btn:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+.navbar-toggler {
+    border: none;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+#extend {
+    margin-top: 40px;
+}
+
+.card-group {
+    width: 90%;
+}
+
+#category .card {
+    border: none;
+    width: 200px;
+    height: 200px;
+    background: transparent;
+}
+
+#category .card a {
+    font-weight: bolder;
+    color: #343a40;
+    text-decoration: none;
+}
+
+h3 {
+    color: #dc3545;
+    font-weight: bolder;
+    padding-left: 2%;
+    padding-bottom: 2%;
+}
+
+/* h4 {
+    padding-left: 8%;
+} */
+
+#category .card .card-img-top {
+    width: 55%;
+    border-radius: 5px;
+
+}
+
+@media screen and (max-width:600px) {
+    #category .card {
+        width: 250px;
+        height: 220px;
+        margin-left: 22%;
+        margin-top: 15%;
+    }
+}
+
+#all {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#product {
+    width: 21%;
+    margin-bottom: 40px;
+    transition: 0.3s;
+    height: 20%;
+    border: 0;
+    z-index: 1;
+    box-shadow: 0 0 30px -10px rgba(0, 0, 0, 0.25);
+}
+
+#product:hover {
+    transform: scale(1.05);
+}
+
+@media screen and (max-width:1000px) {
+    #product {
+        width: 28%;
+    }
+}
+
+@media screen and (max-width:620px) {
+    #extend {
+        width: 100%;
+    }
+
+    #product {
+        width: 38%;
+    }
+
+    .col-md-2 {
+        margin-bottom: 40px;
+    }
+}
+
+#product .card-body .card-text {
+    font-size: 12px;
+}
+
+#product .card-img-top {
+    padding: 10px;
+    height: 220px;
+}
+
+#product .card-body {
+    padding: 0%;
+}
+
+#product a {
+    font-weight: bolder;
+    color: #343a40;
+    text-decoration: none;
+}
+
+#v-nav {
+    display: block;
+}
+
+#v-nav .card {
+    border-radius: 0%;
+}
+
+#v-nav .card-text {
+    text-transform: uppercase;
+    font-size: large;
+    padding-left: 10%;
+    font-weight: bold;
+}
+
+#v-nav .card a {
+    padding-left: 10%;
+    font-size: medium;
+    text-decoration: none;
+    color: #343a40;
+}
+
+.col-md-9 {
+    margin-left: 5%;
+}
+
+.form-check-inline {
+    margin-left: 7.5%;
+    margin-right: -5%;
+    margin-bottom: 20px;
+}
+
+input[type="checkbox"]:hover {
+    cursor: pointer;
+}
+
+input[type="submit"] {
+    color: #343a40;
+    font-size: medium;
+    font-weight: bold;
+}
+
+.modal .modal-content {
+    width: 360px;
+}
+
+a[data-toggle="modal"]:focus {
+    background: transparent;
+}
+
+#signup {
+    background-color: transparent;
+    width: 350px;
+}
+
+#signup input[type="text"],
+#signup input[type="email"],
+#signup input[type="password"],
+#signup input[type="number"],
+#signup input[type="submit"] {
+    width: 85%;
+    margin-left: 4.5%;
+    margin-bottom: 2%;
+    height: 50px;
+    border-radius: 3px;
+}
+
+#signup textarea {
+    width: 85%;
+    margin-left: 4.5%;
+    margin-bottom: 2%;
+    border-radius: 3px;
+}
+
+#signup .form-control-file {
+    width: 85%;
+    margin-left: 4.5%;
+    margin-bottom: 2%;
+    padding: 10px;
+    border-radius: 3px;
+    background-color: #9494941b;
+}
+
+#login {
+    background-color: transparent;
+    width: 350px;
+}
+
+#login input[type="text"],
+#login input[type="password"],
+#login input[type="submit"] {
+    width: 85%;
+    margin-left: 7.5%;
+    margin-bottom: 2%;
+    height: 50px;
+    border-radius: 3px;
+}
+
+#login textarea {
+    width: 85%;
+    margin-left: 7.5%;
+    margin-bottom: 2%;
+    border-radius: 3px;
+}
+
+#login .form-control:focus,
+#signup .form-control:focus,
+.add .form-control:focus {
+    border: 0.5px solid #343a40;
+    box-shadow: none;
+    outline: none;
+}
+
+.dropdown-toggle:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.dropdown-toggle::after {
+    content: none;
+}
+
+.dropdown-toggle {
+    color: rgba(0, 0, 0, .5);
+    margin-top: 1.5px;
+}
+
+.close {
+    border: none;
+}
+
+.close:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.col-md-6 .card .card-img-top {
+    height: 100%;
+}
+
+#multi {
+    width: 80px;
+    height: 80px;
+    border: none;
+    border-radius: 0%;
+    box-shadow: 0 0 30px -10px rgba(0, 0, 0, 0.25);
+    margin-bottom: 10px;
+}
+
+#multi img {
+    object-fit: cover;
+    height: 100%;
+}
+
+#p-imgs {
+    display: flex;
+    flex-direction: column;
+}
+
+.col-md-6 .card {
+    border: none;
+    background: transparent;
+}
+
+.add {
+    width: 350px;
+}
+
+.add .form-control,
+.add button {
+    width: 85%;
+    margin-left: 7.5%;
+    margin-bottom: 2%;
+    height: 50px;
+    border-radius: 3px;
+}
+
+.add .form-control-file {
+    width: 85%;
+    margin-left: 7.5%;
+    margin-bottom: 2%;
+    padding: 10px;
+    border-radius: 3px;
+    background-color: #9494941b;
+}
+
+#ad-drop .dropdown-item:focus {
+    background: transparent;
+    color: #343a40;
+}
+
+.btn-like:focus,
+.btn-cart:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.rounded-0 {
+    box-shadow: 0 0 30px -10px rgba(0, 0, 0, 0.25);
+}
+.brand{
+    font-weight: bold;
+}
+.details{
+    font-size: small;
+    line-height: 5px;
+}
+.cart-item{
+    height: 150px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 30px -10px rgba(0, 0, 0, 0.25);
+}
