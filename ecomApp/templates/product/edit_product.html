@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <h2 class="mb-4">Add Products</h2>
+</div>
+<div class="row justify-content-center">
+    <form action="" method="post" enctype="multipart/form-data" class="add">
+        {% csrf_token %}
+        <div class="form-group">
+            <input type="text" class="form-control" value="{{product.product_name}}" name="pro_name" placeholder="Product name">
+        </div>
+        <div class="form-group">
+            <input type="number" class="form-control" value="{{product.product_price}}" name="pro_price" placeholder="Product price">
+        </div>
+        <div class="form-group">
+            <label for="image">Product image</label><br>
+            <img src="{{product.product_image.url}}" class="w-25" id="image" alt="">
+        </div>
+        <div class="form-group">
+            <input type="file" class="form-control-file" name="pro_image">
+        </div>
+        <div class="form-group">
+            <select name="brand" class="form-control">
+                {% for br in brand %}
+                <option value="{{ br.id }}">{{ br.brand_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <select name="category" class="form-control">
+                {% for cat in category%}
+                <option value="{{ cat.id }}">{{ cat.category_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-danger">Save</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

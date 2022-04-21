@@ -3,6 +3,12 @@
 {% block content %}
 
 <div class="row justify-content-center">
+    {% for message in messages %}
+    <div class="alert alert-mued text-danger">{{message}}</div>
+    {% endfor %}
+</div>
+
+<div class="row justify-content-center">
     <div class="card-group" id="category">
         {% for c in category %}
         <div class="card col-sm-3">

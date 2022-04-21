@@ -7,7 +7,7 @@
 </div>
 
 <div class="row justify-content-center">
-    <table class="table table-hover  table-bordered w-75">
+    <table class="table table-hover shadow w-75">
         <thead class="thead-light">
             <tr>
                 <th>Id</th>
@@ -28,7 +28,7 @@
                 <td><img src="{{p.product_image.url}}" alt="{{p.product_name}}" class="w-25"></td>
                 <td>{{p.brand.brand_name}}</td>
                 <td>{{p.category.category_name}}</td>
-                <td><a href="">Edit</a>&nbsp;<a href="">Delete</a></td>
+                <td><a href="{% url 'edit_product' p.id %}" class="text-primary">Edit</a>&nbsp;<a href="{% url 'delete_product' p.id %}" class="text-danger">Delete</a></td>
             </tr>
             {% endfor %}
         </tbody>

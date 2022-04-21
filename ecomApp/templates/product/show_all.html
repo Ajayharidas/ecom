@@ -67,7 +67,7 @@
             <div class="card" id="product">
                 <img src="{{ product.product_image.url }}" alt="{{ product.product_name }}" class="card-img-top">
                 <div class="card-body text-center">
-                    <a href="" class="stretched-link">{{ product.brand.brand_name }}</a>
+                    <a href="{% url 'product_details' product.id %}" class="stretched-link">{{ product.brand.brand_name }}</a>
                     <p class="card-text">{{ product.product_name }}<br>Rs.{{ product.product_price }}</p>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-from email.mime import image
+import os
 from django.shortcuts import redirect, render
 from ecomApp.models import Brand, Category,Product, Profile,ProductImages,Cart
 from django.contrib import messages
@@ -50,7 +50,7 @@ def add_product(request):
             category = Category.objects.get(id=cat)
             product = Product(product_name=pro_name,product_price=pro_price,product_image=pro_image,brand=brand,category=category)
             product.save()
-            return redirect('show_category')
+            return redirect('product_table')
         return render(request,'product/add_product.html',context)
     else:
         return redirect('log_in')
@@ -71,12 +71,108 @@ def add_multiple(request):
     else:
         return redirect('log_in')
 
+# ------------ edit brand -------------
 
-# -------------- show category---------------
+def edit_brand(request,pk):
+    if "uid" in request.session:
+        if request.method == 'POST':
+            brand = Brand.objects.get(id=pk)
+            brand.brand_name = request.POST['brand_name']
+            if len(request.FILES) != 0:
+                if len(brand.brand_image) > 0:
+                    os.remove(brand.brand_image.path)
+                brand.brand_image = request.FILES['brand_image']
+            brand.save()
+            return redirect('show_brand')
+        brand = Brand.objects.get(id=pk)
+        context = {'brand':brand}
+        return render(request,'brand/edit_brand.html',context)
+
+# ------------edit category ------------    
+def edit_category(request,pk):
+    if "uid" in request.session:
+        if request.method == 'POST':
+            category = Category.objects.get(id=pk)
+            category.category_name = request.POST['cat_name']
+            if len(request.FILES) != 0:
+                if len(category.category_image) > 0:
+                    os.remove(category.category_image.path)
+                category.category_image = request.FILES['cat_image']
+            category.save()
+            return redirect('show_category')
+        category = Category.objects.get(id=pk)
+        context = {'category':category}
+        return render(request,'category/edit_category.html',context)
+
+# ------------ edit product -------------
+def edit_product(request,pk):
+    if "uid" in request.session:
+        if request.method == 'POST':
+            product = Product.objects.get(id=pk)
+            product.product_name = request.POST['pro_name']
+            product.product_price = request.POST['pro_price']
+            brand = request.POST['brand']
+            product.brand = Brand.objects.get(id=brand)
+            category = request.POST['category']
+            product.category = Category.objects.get(id=category)
+            if len(request.FILES) != 0:
+                if len(product.product_image) > 0:
+                    os.remove(product.product_image.path)
+                product.product_image = request.FILES['brand_image']
+            product.save()
+            return redirect('product_table')
+        product = Product.objects.get(id=pk)
+        brand = Brand.objects.all()
+        category = Category.objects.all()
+        context = {'product':product,'brand':brand,'category':category}
+        return render(request,'product/edit_product.html',context)
+
+# ----------------- delete brand ---------------
+
+def delete_brand(request,pk):
+    if "uid" in request.session:
+        brand = Brand.objects.get(id=pk)
+        brand.delete()
+        return redirect('show_brand')
+
+# ----------------- delete category ---------------
+
+def delete_category(request,pk):
+    if "uid" in request.session:
+        category = Category.objects.get(id=pk)
+        category.delete()
+        return redirect('show_category')
+
+
+# ----------------- delete product ---------------
+
+def delete_product(request,pk):
+    if "uid" in request.session:
+        product = Product.objects.get(id=pk)
+        product.delete()
+        return redirect('show_category')
+
+
+# -------------- category table---------------
 def show_category(request):
-    category = Category.objects.all()
-    context = {'category':category}
-    return render(request,'category/show_category.html',context)
+    if "uid" in request.session:
+        category = Category.objects.all()
+        context = {'category':category}
+        return render(request,'category/show_category.html',context)
+
+# -------------- brand table --------------------
+
+def show_brand(request):
+    if "uid" in request.session:
+        brands = Brand.objects.all()
+        return render(request,'brand/show_brand.html',{'brands':brands})
+
+# --------------- product table -------------
+
+def product_table(request):
+    if "uid" in request.session:
+        products = Product.objects.all()
+        return render(request,'product/product_table.html',{'products':products}) 
 
 # ----------------- show products -------------
 def show_product(request,pk):
@@ -102,18 +198,6 @@ def show_product(request,pk):
     categs = Category.objects.all()
     context = {'products':products,'brands':brands,'categs':categs}
     return render(request,'product/show_product.html',context)
-
-# -------------- show brand --------------------
-
-def show_brand(request):
-    brands = Brand.objects.all()
-    return render(request,'brand/show_brand.html',{'brands':brands})
-
-# --------------- show product -------------
-
-def product_table(request):
-    products = Product.objects.all()
-    return render(request,'product/product_table.html',{'products':products}) 
 
 # ------------ show product brand wise ---------------
 def brand_product(request):
@@ -230,6 +314,7 @@ def home(request):
         return render(request,'home.html',context)
     else:
         return redirect('log_in')
+
 def cart(request,pk):
     if "uid" in request.session:
         if request.method == 'POST':
@@ -243,6 +328,7 @@ def cart(request,pk):
             cart.save()
             return redirect('show_cart')
     else:
+        messages.info(request,'Login to add products to cart...!')
         return redirect('log_in')
 
 def show_cart(request):
